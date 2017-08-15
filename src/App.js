@@ -1,38 +1,52 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import './w3.css';
 
 class App extends Component {
   render() {
-    return <Card />;
+    return <Card front="i am the front" back="i am the back"/>;
   }
 }
 
 class Card extends Component {
   constructor(props){
     super(props);
-    this.state = {};
-    this.swapData = this.swapData.bind(this);
+    this.state = {
+      front: props.front,
+      back: props.back,
+      display: null,
+      fipped: false
+    };
     this.saveData = this.saveData.bind(this);
     this.loadData = this.loadData.bind(this);
+    this.flipCard = this.flipCard.bind(this);
   }
 
   componentDidMount() {
-    var r = this.loadData();
-    if (!r){
-      this.setState({cardFront:'abc', cardBack:'123'});
+    //var data = this.loadData();
+    this.setState({
+      display: this.state.front
+    });
+  }
+
+  flipCard(){
+    if (!this.state.flipped){
+      this.setState({
+        display: this.state.back,
+        flipped: true
+      });
+    } else {
+      this.setState({
+        display: this.state.front,
+        flipped: false
+      });
     }
   }
 
-  swapData(){
-    var f = this.state.cardFront;
-    var b = this.state.cardBack;
-    this.setState({cardFront:b, cardBack:f});
-  }
-
   saveData(){
-    localStorage.setItem('cardFront', this.state.cardFront);
-    localStorage.setItem('cardBack', this.state.cardBack);
+    localStorage.setItem('cardFront', this.state.front);
+    localStorage.setItem('cardBack', this.state.back);
   }
 
   loadData(){
@@ -40,17 +54,15 @@ class Card extends Component {
     var b = localStorage.getItem('cardBack');
 
     if (f && b){
-      this.setState({cardFront:f, cardBack:b});
+      this.setState({front:f, back:b});
       return true;
     }
   }
 
   render(){
     return (
-      <div>
-        <p>data on front: "{this.state.cardFront}" <br /> data on back: "{this.state.cardBack}"</p>
-        <button onClick = {this.swapData}>Swap Data</button>
-        <button onClick = {this.saveData}>Save Data</button>
+      <div className="w3-card w3-blue" onClick={this.flipCard}>
+        <p>{this.state.display}</p>
       </div>
     );
   }
