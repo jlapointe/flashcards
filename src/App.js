@@ -74,8 +74,10 @@ class CardGallery extends Component {
   }
 
   addCard(){
+    var face = prompt("Face: ");
+    var back = prompt("Back: ");
     this.setState((prevState) => ({
-      cardList: prevState.cardList.concat([<Card face='foo' back='bar' />])
+      cardList: prevState.cardList.concat([<Card face={face} back={back} />])
     }));
   }
 
