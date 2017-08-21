@@ -7,7 +7,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Card face="i am the face" back="i am the back"/>
+        <CardGallery />
       </div>
     );
   }
@@ -21,8 +21,8 @@ class Card extends Component {
       back: props.back,
       isFaceDown: true
     };
-    this.saveData = this.saveData.bind(this);
-    this.loadData = this.loadData.bind(this);
+    //this.saveData = this.saveData.bind(this);
+    //this.loadData = this.loadData.bind(this);
     this.flipCard = this.flipCard.bind(this);
   }
 
@@ -39,7 +39,7 @@ class Card extends Component {
     }));
   }
 
-  saveData(){
+  /*saveData(){
     localStorage.setItem('cardFace', this.state.face);
     localStorage.setItem('cardBack', this.state.back);
   }
@@ -52,7 +52,7 @@ class Card extends Component {
       this.setState({face:f, back:b});
       return true;
     }
-  }
+  }*/
 
   render(){
     return (
@@ -60,6 +60,51 @@ class Card extends Component {
         <p>{this.state.isFaceDown ? this.state.back : this.state.face}</p>
       </div>
     );
+  }
+}
+
+class CardGallery extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      cardList: [<Card face="face" back="back" />]
+    };
+
+    this.addCard = this.addCard.bind(this);
+  }
+
+  addCard(){
+    this.setState((prevState) => ({
+      cardList: prevState.cardList.concat([<Card face='foo' back='bar' />])
+    }));
+  }
+
+  render(){
+    const listItems = this.state.cardList.map((card) => 
+                                             <li>{card}</li>);
+    return (
+      <div>
+        <ul>{listItems}</ul>
+        <NewCardBtn onClick={this.addCard} />
+      </div>
+    );
+  }
+}
+
+class NewCardBtn extends Component {
+  constructor(props){
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(e){
+    e.preventDefault();
+    this.props.onClick.call();
+  }
+  
+  render(){
+    //return <button>New Card</button>;
+    return <a href="" onClick={this.handleClick}>New Card </a>;
   }
 }
 
