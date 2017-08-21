@@ -5,7 +5,11 @@ import './w3.css';
 
 class App extends Component {
   render() {
-    return <Card front="i am the front" back="i am the back"/>;
+    return (
+      <div>
+        <Card face="i am the face" back="i am the back"/>
+      </div>
+    );
   }
 }
 
@@ -13,10 +17,9 @@ class Card extends Component {
   constructor(props){
     super(props);
     this.state = {
-      front: props.front,
+      face: props.face,
       back: props.back,
-      display: null,
-      fipped: false
+      isFaceDown: true
     };
     this.saveData = this.saveData.bind(this);
     this.loadData = this.loadData.bind(this);
@@ -26,35 +29,27 @@ class Card extends Component {
   componentDidMount() {
     //var data = this.loadData();
     this.setState({
-      display: this.state.front
+      isFaceDown: true
     });
   }
 
   flipCard(){
-    if (!this.state.flipped){
-      this.setState({
-        display: this.state.back,
-        flipped: true
-      });
-    } else {
-      this.setState({
-        display: this.state.front,
-        flipped: false
-      });
-    }
+    this.setState(prevState => ({
+      isFaceDown: !prevState.isFaceDown
+    }));
   }
 
   saveData(){
-    localStorage.setItem('cardFront', this.state.front);
+    localStorage.setItem('cardFace', this.state.face);
     localStorage.setItem('cardBack', this.state.back);
   }
 
   loadData(){
-    var f = localStorage.getItem('cardFront');
+    var f = localStorage.getItem('cardFace');
     var b = localStorage.getItem('cardBack');
 
     if (f && b){
-      this.setState({front:f, back:b});
+      this.setState({face:f, back:b});
       return true;
     }
   }
@@ -62,12 +57,10 @@ class Card extends Component {
   render(){
     return (
       <div className="w3-card w3-blue" onClick={this.flipCard}>
-        <p>{this.state.display}</p>
+        <p>{this.state.isFaceDown ? this.state.back : this.state.face}</p>
       </div>
     );
   }
 }
-
-
 
 export default App;
