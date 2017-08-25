@@ -1,8 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+//import App from './App.jsx';
+//import registerServiceWorker from './registerServiceWorker';
+import React from 'react'
+import { render } from 'react-dom'
+import { Button, Container, Header } from 'semantic-ui-react'
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+const MOUNT_NODE = document.getElementById('root')
+
+const App = () => (
+  <Container>
+    <Header as='h1'>Hello world!</Header>
+
+    <Button
+      content='Discover docs'
+      href='http://react.semantic-ui.com'
+      icon='github'
+      labelPosition='left'
+    />
+  </Container>
+)
+
+render(<App />, MOUNT_NODE)

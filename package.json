@@ -1,16 +1,30 @@
 {
   "name": "flashcards",
   "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
-    "react-scripts": "1.0.10"
-  },
+  "description": "Build decks of flashcards and quiz yourself!",
+  "main": "main.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "analyze": "cross-env ANALYZE_ENV=true npm run build",
+    "analyze:production": "cross-env ANALYZE_ENV=true npm run build:production",
+    "build": "webpack",
+    "build:production": "cross-env NODE_ENV=production npm run build"
+  },
+  "author": "Jordan Lapointe <jordan.lapointe@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-lodash": "^3.2.11",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-1": "^6.24.1",
+    "cross-env": "^5.0.0",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "semantic-ui-react": "^0.68.4",
+    "webpack": "^2.6.1"
+  },
+  "devDependencies": {
+    "webpack-bundle-analyzer": "^2.8.2"
   }
 }
