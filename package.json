@@ -2,8 +2,9 @@
   "name": "flashcards",
   "version": "0.1.0",
   "description": "Build decks of flashcards and quiz yourself!",
-  "main": "main.js",
+  "main": "index.js",
   "scripts": {
+    "start": "react-scripts start",
     "analyze": "cross-env ANALYZE_ENV=true npm run build",
     "analyze:production": "cross-env ANALYZE_ENV=true npm run build:production",
     "build": "webpack",
