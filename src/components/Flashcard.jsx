@@ -1,23 +1,13 @@
 import React, { Component } from 'react';
-import { Card, Menu, Icon } from 'semantic-ui-react';
+import { Dropdown, Grid, Menu, Segment } from 'semantic-ui-react';
 
 class Flashcard extends Component {
   constructor(props){
     super(props);
-    this.answerText = this.props.answerText;
-    this.questionText = this.props.questionText;
     this.state = {
-      isFlipped: false
+      isFlipped: false,
     };
-    
     this.flipCard = this.flipCard.bind(this);
-    this.rmCard = this.rmCard.bind(this);
-  }
-
-  componentDidMount() {
-    /*this.setState({
-      isFlipped: true
-    });*/
   }
 
   flipCard(){
@@ -27,25 +17,17 @@ class Flashcard extends Component {
     }));
   }
 
-  rmCard(e){
-    e.stopPropagation();
-    console.log('remove card');
-  }
-
   render(){
     return (
-      <Card onClick={this.flipCard}>
-        <Card.Header>
-          <Menu icon secondary fitted>
-            <Menu.Item name='remove' position='right'>
-              <Icon name='remove' onClick={this.rmCard}/>
-            </Menu.Item>
-          </Menu>
-        </Card.Header>
-        <Card.Content>
-          {this.state.isFlipped ? this.answerText : this.questionText}
-        </Card.Content>
-      </Card>
+      <Grid container stretched>
+        <Grid.Row columns={1}>
+          <Grid.Column>
+            <Segment onClick={this.flipCard} as='div'>
+              {this.state.isFlipped ? this.props.answerText : this.props.questionText}
+            </Segment>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
     );
   }
 }

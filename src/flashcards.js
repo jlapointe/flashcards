@@ -12,21 +12,8 @@ import FlashcardScreen from './components/FlashcardScreen.jsx';
 
 const MOUNT_NODE = document.getElementById('root')
 
-const cardList = [
-  {
-    key:1,
-    questionText: "Q 1",
-    answerText: "A 1"
-  },
-  {
-    key:2,
-    questionText: "Q 2",
-    answerText: "A 2"
-  }
-];
-
-const App = () => (
+const Flashcards = () => (
   <FlashcardScreen cardList={cardList} />
 )
 
-render(<App />, MOUNT_NODE)
+render(<Flashcards />, MOUNT_NODE)
